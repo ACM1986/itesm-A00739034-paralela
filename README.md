@@ -1,138 +1,31 @@
-# Proyecto OpenMP - Suma Paralela de Arreglos
+# Suma Paralela de Arreglos con OpenMP
 
-## ¿Qué hace este proyecto?
+Este es un proyecto que demuestra cómo usar OpenMP para sumar dos arreglos de 1000 elementos de forma paralela. La idea es ver cómo el procesamiento en paralelo hace las cosas mucho más rápidas.
 
-✅ Suma dos arreglos en paralelo (porque esperar es aburrido)  
-✅ Puedes elegir valores random o poner los tuyos propios  
-✅ Mide qué tan rápido va (spoiler: ¡muy rápido!)  
-✅ Te muestra que todo salió bien  
-✅ Imprime los resultados para que veas la magia  
+## ¿Qué hace?
 
-## Lo que necesitas tener instalado
+Suma dos arreglos elemento por elemento usando múltiples hilos de tu CPU. Puedes elegir si quieres números aleatorios o poner los tuyos propios. Al final te muestra cuánto tiempo tardó y verifica que todo esté bien.
 
-- Visual Studio 2019 o más reciente (con las herramientas de C++)
-- El compilador MSVC (ya viene con Visual Studio)
-- Windows 10 o superior (aunque si tienes Windows 11, también jala)
+## Requisitos
 
-## Cómo configurar el proyecto en Visual Studio
+- Visual Studio 2019 o superior
+- Windows 10+
 
-### La forma fácil (ya está todo listo):
+## Cómo usarlo
 
-1. Abre Visual Studio
-2. Dale a **File > Open > Project/Solution**
-3. Busca la carpeta del proyecto y abre `OpenMP_ArraySum.sln`
-4. ¡Y ya! El proyecto ya tiene OpenMP configurado, así que solo corre y corre
+1. Abre `OpenMP_ArraySum.sln` en Visual Studio
+2. Presiona **F5** o **Ctrl+F5** para ejecutar
+3. Elige si quieres valores aleatorios o manuales
+4. ¡Listo! Ve los resultados en pantalla
 
-### Por si acaso (verificar OpenMP manualmente):
+## ¿Qué voy a ver?
 
-Oye, si por alguna razón quieres asegurarte de que OpenMP esté activado o necesitas hacerlo manual:
-
-1. Click derecho en el proyecto (está en el **Solution Explorer**)
-2. Entra a **Properties** (Propiedades)
-3. Navega a **Configuration Properties > C/C++ > Language**
-4. Busca **Open MP Support** y ponlo en **Yes (/openmp)**
-5. Dale OK y listo
-
-**Pro tip:** Asegúrate de que esto esté activado tanto en Debug como en Release, y en todas las plataformas (x86/x64). No querrás sorpresas después.
-
-## Cómo Compilar y Ejecutar
-¿Cómo lo corro?
-
-### Opción A: Desde Visual Studio (la más cómoda):
-
-1. Abre `OpenMP_ArraySum.sln`
-2. Elige si quieres Debug o Release (te recomiendo x64)
-3. Dale **F5** si quieres debuguear
-4. O mejor aún, **Ctrl+F5** para correrlo directo sin debug (va más rápido)
-
-### Opción B: Modo hardcore (línea de comandos):
-
-Si eres de los que les gusta la terminal:
-
-```bash
-# Ve a la carpeta del proyecto
-cd "OpenMP_ArraySum"
-
-# Compila
-cl /EHsc /openmp main.cpp
-
-# ¡A correr!
-```¿Cómo usar el programa?
-
-Cuando lo ejecutes, te va a salir un menú así:
-
-```
-=== SUMA PARALELA DE ARREGLOS CON OpenMP ===
-Cantidad de elementos: 1000
-
-Seleccione una opcion:
-1. Generar valores aleatorios
-2. Ingresar valores manualmente (solo primeros 10)
-Opcion:
-```
-
-### Opción 1: Modo aleatorio (mi favorita)
-Dale 1 y el programa generará automáticamente 1000 números random entre 0 y 99. Es perfecto cuando solo quieres ver cómo funciona sin complicarte la vida.
-
-### Opción 2: Modo manual (para los perfeccionistas)
-Aquí tú pones los primeros 10 números de cada arreglo. Los otros 990 se llenan solos con valores random. Es útil cuando quieres probar casos específicos o simplemente quieres tener control.eros 10 valores de cada arreglo
-- Los elementos restantes (10-999) se llenan aleatoriamente
-- Útil para verificar casos específicos
-
-## Salida del Programa
-
-El programa muestra:
-¿Qué voy a ver en la pantalla?
-
-El programa te va a mostrar un montón de info interesante:
-
-1. **Los arreglos originales**: Te muestra los primeros 20 números de cada uno
-2. **Cuántos hilos se están usando**: Para que veas el poder de tu CPU
-3. **Qué tan rápido fue**: El tiempo exacto que tardó (prepárate para sorprenderte)
-4. **El resultado**: Los primeros 20 números de la suma
-5. **Una tabla de verificación**: Para que compruebes que todo está bien
-
-Por ejemplo, verías algo asíINALES ===
-Arreglo A (primeros 20 elementos): 45 12 89 34 67 ...
-Arreglo B (primeros 20 elementos): 23 56 78 90 12 ...
-
-=== PROCESAMIENTO PARALELO ===
-Numero de hilos disponibles: 8
-Suma completada en 0.000234 segundos
-
-=== RESULTADO ===
-Arreglo Resultado (A+B) (primeros 20 elementos): 68 68 167 124 79 ...
-
-=== VERIFICACION (primeros 10 elementos) ===
-Indice  A[i]      B[i]      Resultado[i]   A[i]+B[i]      Correcto?
-----------------------------------------------------------------------
-0       45        23        68             68             SI
-1       12        56        68             68             SI
-...
-```
-
-## Estructura del Código
-
-### Funciones Principales:
-¿Cómo está hecho el código?
-
-### Las funciones importantes:
-
-- `imprimirArreglo()`: Hace lo que su nombre dice, imprime los primeros N elementos
-- `main()`: El cerebro de la operación, donde pasa toda la magia
-
-### Las directivas de OpenMP que usamo
-```
-Esta directiva distribuye las iteraciones del bucle entre múltiples hilos.
-
-```cpp
-#pragma omp parallel
-{
-    #pragma omp single
-    // código...
-}
-```
-Obtiene información sobre los hilos en ejecución.
+El programa te muestra:
+- Los primeros 20 elementos de cada arreglo
+- Cuántos hilos está usando tu CPU
+- El tiempo que tardó (milisegundos)
+- Los resultados de la suma
+- Una tabla de verificación para confirmar que todo está bien
 
 ## La magia del código paralelo explicada
 
@@ -146,7 +39,7 @@ for (int i = 0; i < N; i++) {
 }
 ```
 
-¿Qué está pasando aquí? Bueno, es súper interesante:
+¿Qué está pasando aquí? 
 1. Ese `#pragma` le dice al programa "oye, usa todos los hilos que puedas"
 2. Automáticamente divide las 1000 sumas entre todos tus núcleos de CPU
 3. Cada hilo agarra su pedacito y trabaja independiente
@@ -200,6 +93,4 @@ Lo hice para la materia de Cómputo en la Nube en la Maestría de IA. Es un proy
 ## Autor
 
 Proyecto creado para la materia de Cómputo en la Nube - Maestría en IA
-
----
-**Fecha:** Febrero 2026
+Alberto Cortes Murillo
