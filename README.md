@@ -1,7 +1,5 @@
 # Proyecto OpenMP - Suma Paralela de Arreglos
 
-¡Hola! Este proyecto es una demostración práctica de cómo usar OpenMP para hacer que tu código C++ vuele. Literalmente vamos a sumar dos arreglos de 1000 elementos usando múltiples hilos al mismo tiempo. ¿Cool, verdad?
-
 ## ¿Qué hace este proyecto?
 
 ✅ Suma dos arreglos en paralelo (porque esperar es aburrido)  
